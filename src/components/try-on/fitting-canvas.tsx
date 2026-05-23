@@ -9,6 +9,8 @@ interface VTOProps {
   garmentImageUrl: string;
 }
 
+const PREMIUM_FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop';
+
 export default function FittingCanvas({ garmentId, garmentImageUrl }: VTOProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
