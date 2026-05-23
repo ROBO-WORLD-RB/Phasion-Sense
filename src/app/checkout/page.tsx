@@ -119,7 +119,7 @@ export default function CheckoutPage() {
           )}
 
           <form onSubmit={handleHandshakeCheckout} className="space-y-8 font-mono text-[10px]">
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2 input-under-border-container pb-1">
               <label className="text-[#71717a] uppercase tracking-[0.25em] font-semibold">
                 Full Name *
               </label>
@@ -128,12 +128,13 @@ export default function CheckoutPage() {
                 type="text" 
                 value={name} 
                 onChange={e => setName(e.target.value)} 
-                className="bg-[#16161e] border border-[#1c1c24] focus:border-[#d4af37] p-4 text-xs text-[#f4f4f5] outline-none transition-all duration-300 rounded-sm focus:ring-1 focus:ring-[#d4af37]/20 placeholder-[#3f3f46]" 
+                className="bg-transparent border-0 border-b border-[#1c1c24] focus:border-transparent py-3 px-1 text-xs text-[#f4f4f5] outline-none transition-all duration-300 placeholder-[#3f3f46]" 
                 placeholder="e.g., Kwame Mensah" 
               />
+              <span className="input-under-border-line" />
             </div>
             
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2 input-under-border-container pb-1">
               <label className="text-[#71717a] uppercase tracking-[0.25em] font-semibold">
                 WhatsApp Mobile Contact *
               </label>
@@ -142,12 +143,13 @@ export default function CheckoutPage() {
                 type="tel" 
                 value={phone} 
                 onChange={e => setPhone(e.target.value)} 
-                className="bg-[#16161e] border border-[#1c1c24] focus:border-[#d4af37] p-4 text-xs text-[#f4f4f5] outline-none transition-all duration-300 rounded-sm focus:ring-1 focus:ring-[#d4af37]/20 placeholder-[#3f3f46]" 
+                className="bg-transparent border-0 border-b border-[#1c1c24] focus:border-transparent py-3 px-1 text-xs text-[#f4f4f5] outline-none transition-all duration-300 placeholder-[#3f3f46]" 
                 placeholder="e.g., +233 50 000 0000" 
               />
+              <span className="input-under-border-line" />
             </div>
             
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2 input-under-border-container pb-1">
               <label className="text-[#71717a] uppercase tracking-[0.25em] font-semibold">
                 Tailoring Instructions & Design Notes
               </label>
@@ -155,9 +157,10 @@ export default function CheckoutPage() {
                 value={note} 
                 onChange={e => setNote(e.target.value)} 
                 rows={4} 
-                className="bg-[#16161e] border border-[#1c1c24] focus:border-[#d4af37] p-4 text-xs text-[#f4f4f5] outline-none transition-all duration-300 rounded-sm focus:ring-1 focus:ring-[#d4af37]/20 placeholder-[#3f3f46] resize-none" 
+                className="bg-transparent border-0 border-b border-[#1c1c24] focus:border-transparent py-3 px-1 text-xs text-[#f4f4f5] outline-none transition-all duration-300 placeholder-[#3f3f46] resize-none" 
                 placeholder="Provide height, standard sizes, or custom Ankara/Kente sleeve embroidery directives..." 
               />
+              <span className="input-under-border-line" />
             </div>
 
             <button 

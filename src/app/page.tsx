@@ -7,6 +7,7 @@ import OfflineBanner from '../components/offline-banner';
 import InventoryGrid from '../components/inventory-grid';
 import CartDrawer from '../components/cart-drawer';
 import SyncToast from '../components/sync-toast';
+import StylistChat from '../components/try-on/stylist-chat';
 
 export default function Home() {
   const initCart = useCartStore((state) => state.initCart);
@@ -28,50 +29,87 @@ export default function Home() {
 
       {/* Modern Fashion Navigation Layout Header */}
       <nav className="border-b border-[#16161e] py-6 px-4 md:px-12 flex justify-between items-center text-[#f4f4f5] sticky top-0 bg-[#09090b]/90 backdrop-blur-md z-40">
-        <div className="flex items-center space-x-3">
-          {/* High-Fidelity Brand Logo Image */}
-          <div className="w-8 h-8 rounded-full border border-[#d4af37]/30 overflow-hidden flex items-center justify-center bg-[#16161e] select-none">
-            <img 
-              src="https://api-hackathon.codedematrixtech.com/images/amina-stitches/logo.png"
-              alt="Phasion Sense Logo" 
-              className="w-full h-full object-cover filter grayscale contrast-125"
-              onError={(e) => {
-                // Defensively Safe Logo Fallback: Hides the broken image icon and mounts a golden monogram
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-                const parent = target.parentElement;
-                if (parent && !parent.querySelector('.fallback-monogram')) {
-                  const span = document.createElement('span');
-                  span.className = 'font-mono text-sm text-[#d4af37] font-bold fallback-monogram tracking-normal';
-                  span.innerText = 'Φ';
-                  parent.appendChild(span);
-                }
-              }}
-            />
+        <div className="flex items-center space-x-3 group/brand cursor-pointer">
+          {/* High-Fidelity Brand Logo Image with Gold Halo Spin */}
+          <div className="relative w-9 h-9 flex items-center justify-center select-none">
+            {/* Spinning Golden Dashed Halo */}
+            <div className="absolute inset-0 rounded-full border border-dashed border-[#d4af37]/30 group-hover/brand:border-[#d4af37]/70 animate-spin-halo pointer-events-none transition-colors duration-500" />
+            
+            {/* Logo Inner Circle */}
+            <div className="w-7 h-7 rounded-full border border-[#d4af37]/20 group-hover/brand:border-[#d4af37]/40 overflow-hidden flex items-center justify-center bg-[#16161e] relative z-10 transition-transform duration-500 group-hover/brand:scale-[1.02]">
+              <img 
+                src="/images/logo.png"
+                alt="Phasion Sense Logo" 
+                className="w-full h-full object-cover filter grayscale contrast-125 transition-all duration-700 group-hover/brand:grayscale-0 group-hover/brand:contrast-100"
+                onError={(e) => {
+                  // Defensively Safe Logo Fallback: Hides the broken image icon and mounts a golden monogram
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent && !parent.querySelector('.fallback-monogram')) {
+                    const span = document.createElement('span');
+                    span.className = 'font-mono text-xs text-[#d4af37] font-bold fallback-monogram tracking-normal';
+                    span.innerText = 'Φ';
+                    parent.appendChild(span);
+                  }
+                }}
+              />
+            </div>
           </div>
 
           <div className="flex flex-col">
-            <span className="font-sans font-light tracking-widest text-base md:text-xl uppercase">
+            <span className="font-sans font-light tracking-widest text-base md:text-xl uppercase group-hover/brand:text-[#d4af37] transition-colors duration-500">
               Phasion Sense <span className="text-[#d4af37] font-semibold">//</span> Studio
             </span>
-            <span className="font-mono text-[9px] text-[#27272a] tracking-widest uppercase mt-0.5 hidden md:inline">
+            <span className="font-mono text-[9px] text-[#27272a] group-hover/brand:text-[#71717a] tracking-widest uppercase mt-0.5 hidden md:inline transition-colors duration-500">
               Premium Contemporary Collection
             </span>
           </div>
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* ECO MODE INTERACTIVE ACTION TRIGGER BOX */}
+          {/* ECO MODE PREMIUM NEON GLOWING SLIDER SWITCH */}
+          <div className="flex items-center space-x-3 bg-[#16161e] border border-[#272730] px-4 py-2.5 rounded-full relative select-none">
+            <span className="font-mono text-[8px] text-[#a1a1aa] tracking-widest uppercase">
+              Eco Mode
+            </span>
+            <button
+              onClick={toggleEcoMode}
+              className={`w-10 h-5 rounded-full p-0.5 transition-all duration-500 ease-out focus:outline-none relative flex items-center ${
+                isEcoMode 
+                  ? 'bg-[#1B4D3E] border border-[#d4af37]/40 animate-glow-pulse' 
+                  : 'bg-[#09090b] border border-[#272730]'
+              }`}
+              title="Toggle Bandwidth Saver Mode"
+            >
+              {/* Slider Knob */}
+              <div 
+                className={`w-3.5 h-3.5 rounded-full transition-transform duration-500 ease-out shadow-md flex items-center justify-center ${
+                  isEcoMode 
+                    ? 'translate-x-5 bg-[#d4af37]' 
+                    : 'translate-x-0.5 bg-[#27272a]'
+                }`}
+              >
+                {/* Active Indicator dot */}
+                {isEcoMode && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1b4d3e]" />
+                )}
+              </div>
+            </button>
+          </div>
+
           <button 
-            onClick={toggleEcoMode}
-            className={`font-mono text-[10px] tracking-widest uppercase py-2 px-3 border transition-all duration-300 rounded-sm ${isEcoMode ? 'bg-[#d4af37] text-[#09090b] border-[#d4af37] font-semibold' : 'border-[#272730] text-[#a1a1aa] hover:text-[#f4f4f5] hover:border-[#a1a1aa]'}`}
+            onClick={() => {
+              if (typeof window !== 'undefined') window.location.href = '/chat';
+            }}
+            className="font-mono text-xs tracking-widest uppercase py-2.5 px-4 border border-[#27272a] hover:border-[#d4af37] hover:text-[#d4af37] transition-all duration-300 relative"
           >
-            {isEcoMode ? '[ ECO MODE: ON ]' : '[ ECO MODE: OFF ]'}
+            AI Stylist
           </button>
 
           <button 
             onClick={() => toggleDrawer(true)}
-            className="font-mono text-xs tracking-widest uppercase py-2 px-4 border border-[#27272a] hover:border-[#f4f4f5] hover:text-[#d4af37] transition-all duration-300 relative flex items-center space-x-2"
+            className="font-mono text-xs tracking-widest uppercase py-2.5 px-4 border border-[#27272a] hover:border-[#f4f4f5] hover:text-[#d4af37] transition-all duration-300 relative flex items-center space-x-2"
           >
             <span>Shopping Bag</span>
             <span className="bg-[#16161e] text-[#d4af37] px-1.5 py-0.5 text-[10px] font-bold border border-[#27272a]">
@@ -82,9 +120,25 @@ export default function Home() {
       </nav>
 
       {/* Interactive Catalog Grid Layout Module */}
-      <div className="pb-24">
+      <div className="pb-16">
         <InventoryGrid />
       </div>
+
+      {/* Editorial AI Styling Lounge Section */}
+      <section className="w-full bg-[#111116] border-t border-[#16161e] px-6 md:px-16 py-20 text-[#f4f4f5] pb-28">
+        <div className="max-w-4xl mx-auto flex flex-col space-y-12">
+          <div className="text-center space-y-2">
+            <h2 className="font-sans text-2xl md:text-3xl font-extralight tracking-tight uppercase">
+              The Digital Atelier Lounge
+            </h2>
+            <p className="font-mono text-[9px] text-[#d4af37] tracking-[0.25em] uppercase">
+              Consult with our Resident AI Stylist
+            </p>
+          </div>
+          
+          <StylistChat />
+        </div>
+      </section>
 
       {/* Slide-out Persistent Drawer Context Panel */}
       <CartDrawer />

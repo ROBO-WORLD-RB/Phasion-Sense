@@ -99,7 +99,7 @@ export default function InventoryGrid() {
           return (
             <div 
               key={product.id} 
-              className="group flex flex-col relative bg-[#09090b] border border-transparent hover:border-[#1c1c24] p-3 transition-all duration-500 ease-out"
+              className="group flex flex-col relative bg-transparent hover:bg-white/[0.01] hover:backdrop-blur-md border border-transparent hover:border-[#272730]/40 p-4 transition-all duration-700 ease-out hover:shadow-[0_30px_100px_rgba(212,175,55,0.03)] rounded-sm"
             >
               {/* Aspect Ratio Controlled Image Wrapper */}
               <div className="relative aspect-[3/4] w-full bg-[#16161e] overflow-hidden mb-5 border border-[#1c1c24] group-hover:border-[#272730] transition-colors duration-500">
@@ -116,7 +116,7 @@ export default function InventoryGrid() {
                   <img
                     src={resolvedImageUrl}
                     alt={product.name}
-                    className="object-cover w-full h-full filter grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-1000 ease-out"
+                    className="object-cover w-full h-full filter grayscale contrast-115 group-hover:grayscale-0 group-hover:contrast-100 group-hover:scale-[1.06] transition-all duration-[1200ms] cubic-bezier(0.16, 1, 0.3, 1)"
                     loading="lazy"
                     onError={(e) => {
                       // Defensively Safe Image Fallback Engine (The 404 Counter-Measure)

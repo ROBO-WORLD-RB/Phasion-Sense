@@ -3,9 +3,10 @@
 import { useSearchParams } from 'next/navigation';
 import { useCatalogStore } from '../../store/catalogStore'; // Core catalog store path
 import FittingCanvas from '../../components/try-on/fitting-canvas';
+import StylistChat from '../../components/try-on/stylist-chat';
 import { formatMinorToCedi } from '../../utils/currency';
 import Link from 'next/link';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 
 // High-fidelity premium contemporary African fashion alternative CDN image (Unsplash curated lookbook asset)
 const PREMIUM_FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600&auto=format&fit=crop';
@@ -25,7 +26,14 @@ const resolveProductImage = (url: string | undefined): string => {
 function TryOnPageContent() {
   const searchParams = useSearchParams();
   const targetId = searchParams.get('item_id');
-  const itemsCache = useCatalogStore((state) => state.items);
+  const { items: itemsCache, hydrateCatalog } = useCatalogStore();
+
+  useEffect(() => {
+    // Hydrate catalog automatically on direct VTO route landing or page hard-refreshes
+    if (itemsCache.length === 0) {
+      hydrateCatalog('amina-stitches', 'team-alpha');
+    }
+  }, [itemsCache, hydrateCatalog]);
 
   const matchedGarment = itemsCache.find((p) => p.id === targetId);
 
@@ -74,12 +82,14 @@ function TryOnPageContent() {
             </div>
           </div>
 
-          {/* Right Columns: The AI Generation Interactive Canvas Canvas */}
-          <div className="lg:col-span-2">
+          {/* Right Columns: The AI Generation Interactive Canvas & Stylist Chat */}
+          <div className="lg:col-span-2 space-y-12">
             <FittingCanvas 
               garmentId={matchedGarment.id} 
               garmentImageUrl={resolvedImageUrl} 
             />
+            
+            <StylistChat />
           </div>
         </div>
       ) : (
