@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCartStore } from '../../store/cartStore';
 import { useCatalogStore } from '../../store/catalogStore';
 import { syncEngine } from '../../services/syncEngine';
@@ -12,8 +12,15 @@ import Link from 'next/link';
 const PREMIUM_FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600&auto=format&fit=crop';
 
 export default function CheckoutPage() {
-  const { cart, clearCart } = useCartStore();
-  const itemsCache = useCatalogStore((state) => state.items);
+  const { cart, clearCart, initCart } = useCartStore();
+  const { items: itemsCache, hydrateCatalog } = useCatalogStore();
+
+  useEffect(() => {
+    initCart();
+    if (itemsCache.length === 0) {
+      hydrateCatalog('amina-stitches', 'team-alpha');
+    }
+  }, [initCart, hydrateCatalog, itemsCache.length]);
   
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
