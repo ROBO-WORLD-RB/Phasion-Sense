@@ -107,6 +107,29 @@ export default function Home() {
         </div>
       </footer>
 
+      {/* Floating Luxury WhatsApp Chat Assistance Button */}
+      <a 
+        href="https://wa.me/233535186123?text=Hello%20Amina%20Stitches,%20I'm%20browsing%20the%20Phasion%20Sense%20capsule%20collection%20and%20would%20love%20to%20inquire%20about%20a%20garment%20fit!"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-8 right-8 z-30 flex items-center space-x-3 bg-[#1B4D3E]/95 hover:bg-[#1B4D3E] text-[#f4f4f5] border border-[#d4af37]/40 hover:border-[#d4af37] px-5 py-3.5 shadow-2xl backdrop-blur-md rounded-full transition-all duration-500 ease-out hover:scale-[1.05] group"
+        title="Consult with Lead Tailor on WhatsApp"
+      >
+        <div className="relative w-5 h-5 flex items-center justify-center">
+          {/* Pulsing indicator ring */}
+          <span className="absolute inset-0 rounded-full bg-[#d4af37]/30 animate-ping group-hover:bg-[#d4af37]/50" />
+          <svg 
+            viewBox="0 0 24 24" 
+            className="w-4 h-4 fill-current text-[#d4af37] relative z-10 transition-transform duration-500 group-hover:rotate-12"
+          >
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.417 9.863-9.864.001-2.639-1.026-5.122-2.892-6.991C16.576 1.884 14.1 .856 11.464.856c-5.44 0-9.866 4.418-9.869 9.866-.001 1.76.471 3.478 1.365 5.011L1.87 20.316l4.777-1.162zm10.963-6.84c-.266-.134-1.579-.78-1.823-.867-.243-.088-.419-.133-.596.134-.176.265-.681.866-.836 1.043-.154.177-.31.199-.576.065-.266-.134-1.12-.413-2.133-1.32-.788-.702-1.32-1.569-1.474-1.836-.155-.266-.017-.41.117-.543.12-.12.266-.31.399-.465.133-.155.177-.266.266-.443.089-.177.044-.332-.022-.465-.067-.133-.596-1.439-.817-1.97-.215-.518-.432-.447-.596-.456-.153-.008-.33-.009-.507-.009-.177 0-.465.067-.708.333-.243.265-.929.907-.929 2.21 0 1.305.95 2.56 1.08 2.73 1.127 1.484 2.115 2.459 3.513 2.946.883.308 1.547.337 2.132.25.653-.098 1.579-.646 1.8-.1.223-.548.223-1.018.156-1.107-.067-.089-.243-.133-.509-.267z"/>
+          </svg>
+        </div>
+        <span className="font-mono text-[9px] font-bold tracking-[0.2em] uppercase text-[#d4af37] group-hover:text-[#f4f4f5] transition-colors duration-300">
+          Tailor Chat
+        </span>
+      </a>
+
       {/* Terms & Conditions Modal Overlay */}
       {isTermsOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm animate-fade-in p-4">
